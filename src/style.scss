@@ -1,3 +1,28 @@
-html {
-    color: blue;
+$slider_background: #FFFFFF;
+$slider_border_color: rgba(31, 32, 65, 0.25);
+
+$slider_width: 266px;
+$slider_height : 6px;
+$slider_border_radius: 3px;
+
+$handler_background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+
+.slider {
+    width: $slider_width;
+    height: $slider_height;
+    background: $slider_background;
+    border: 1px solid $slider_border_color;
+    box-sizing: border-box;
+    border-radius: $slider_border_radius;
+
+    &__handler {
+        position: relative;
+        width: 12px;
+        height: 12px;
+        background: $handler_background;
+        border: 2px solid #FFFFFF;
+        border-radius: 10px;
+        margin-top: -6px;
+        margin-left: -9px;
+    }
 }
