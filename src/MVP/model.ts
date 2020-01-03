@@ -1,23 +1,17 @@
 export class Model {
-    private defaults = {
-        start: 0,
-        end: 100,
-        step: 1,
-        orientation: "horizontal",
-        range: false,
+    static counter: number = 0;
+
+    sliderId: string;
+    handlerId: string;
+    elem: JQuery;
+
+    defaults: SliderOptions = {
+        step: 1
     };
 
-    constructor(
-        private step?: number,
-        private orientation?: string,
-        private range?: boolean,
-        private start?: number,
-        private end?: number
-    ) {
-        this.defaults.step = step;
-        this.defaults.orientation = orientation;
-        this.defaults.range = range;
-        this.defaults.start = start;
-        this.defaults.end = end;
+    constructor(options?:SliderOptions) {
+        for(let key in options) {
+            this.defaults[key] = options[key];
+        }
     }
 }

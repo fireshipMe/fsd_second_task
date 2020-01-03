@@ -1,6 +1,6 @@
 interface SliderOptions {
+    [index: string]: any
     step?: number
-    interval?: boolean
 }
 
 interface JQuery {
