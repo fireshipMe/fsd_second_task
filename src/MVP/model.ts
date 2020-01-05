@@ -4,14 +4,17 @@ export class Model {
     sliderId: string;
     handlerId: string;
     elem: JQuery;
-
+    currentValue: number;
+    arrValues: Array<number>;
     defaults: SliderOptions = {
-        step: 1
+        step: 1,
+        isDiscrete: true
     };
 
     constructor(options?:SliderOptions) {
         for(let key in options) {
             this.defaults[key] = options[key];
         }
+        this.currentValue = 0;
     }
 }
