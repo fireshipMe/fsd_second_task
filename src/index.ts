@@ -15,12 +15,11 @@ $.fn.slider = function(this: JQuery, options ?: SliderOptions) {
     return this;
 }
 
-$(".test").slider({step: 10, isDiscrete: true});
-
-// function setPosition(pos: string) {
-//     (<HTMLElement>document.querySelector('#handler')).style.left = pos;
-// }
-
+$(".test").slider({step: 1,
+                start:0,
+                end:100,
+                isDiscrete: false
+            });
 
 
 

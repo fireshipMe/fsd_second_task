@@ -65,12 +65,16 @@ export class Presenter {
 
         function moveAt(pageX: number) {
             if((pageX - shiftX) > 0 && (pageX - shiftX ) < 265) {
-                that.model.currentValue = that.posToValue();
+                that.model.currentPercentage = that.posToValue();
+                that.model.currentValue = Math.round(that.model.currentPercentage * (that.model.defaults.end - that.model.defaults.start) + that.model.defaults.start);
                 that.model.elem.children().css("left",  pageX - shiftX + 'px');
+
                 if(that.model.defaults.isDiscrete) {
                 that.model.elem.children().css("left",
                   that.model.arrValues[Math.ceil(that.posToValue()/that.model.defaults.step)] + 'px');
                 }
+
+                console.log(that.model.currentValue)
             }
         }
         function onMouseMove(e: any) {
@@ -85,10 +89,14 @@ export class Presenter {
         document.addEventListener('mouseup', onMouseUp);
     }
 
+    //**
+    //  Use to get percentage
+    //*
+
     posToValue(): number {
         let handler = document.getElementById(this.model.handlerId);
         let container = document.getElementById(this.model.sliderId);
-        return Math.round((handler.offsetLeft/container.clientWidth)*100);
+        return Math.round((handler.offsetLeft/container.clientWidth)*100)/100;
     }
 
     setHandlerPosition(pos: string) {
