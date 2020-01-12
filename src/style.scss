@@ -8,6 +8,7 @@ $slider_border_radius: 3px;
 $handler_background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
 
 .slider {
+    position: absolute;
     width: $slider_width;
     height: $slider_height;
     background: $slider_background;
@@ -23,6 +24,21 @@ $handler_background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
         border: 2px solid #FFFFFF;
         border-radius: 10px;
         margin-top: -6px;
-        margin-left: -9px;
+        margin-left: -6px;
+        &-info {
+            position: relative;
+            width: 68px;
+            height: 16px;
+            background: white;
+            bottom: 20px;
+        }
     }
+
+    
+}
+
+// delete then
+.container {
+    margin-top: 100px;
+    margin-left: 100px;
 }

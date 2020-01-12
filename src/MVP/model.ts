@@ -7,9 +7,8 @@ export class Model {
     currentPercentage: number;
     currentValue: number;
     arrValues: Array<number>;
-    
+
     // Either step or discrete option is used
-    
     defaults: SliderOptions = {
         step: 1,
         start: 0,

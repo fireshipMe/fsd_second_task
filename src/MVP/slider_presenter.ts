@@ -1,5 +1,6 @@
+import * as $ from 'jquery';
 import { Model } from "./model";
-import { View } from "./view";
+import { View } from "./slider_view";
 import { RaiseMessage } from "./interfaces/observer_interface";
 
 export class Presenter {
@@ -49,10 +50,12 @@ export class Presenter {
 
     buildSlider(elem: JQuery, handlerId: string, sliderId: string) {
         let handler = '<div class="slider__handler" id="' + handlerId + '"></div>';
+        let info = '<div class="slider__handler-info" id='+'info_' + handlerId + '"></div>';
 
         elem.addClass("slider");
         elem.attr("id", sliderId);
         elem.append(handler);
+        elem.children().append(info)
     }
 
     // Moving handler
@@ -62,19 +65,25 @@ export class Presenter {
         let that = this;
 
         let shiftX = e.clientX - that.model.elem.children().position().left;
-
         function moveAt(pageX: number) {
-            if((pageX - shiftX) > 0 && (pageX - shiftX ) < 265) {
-                that.model.currentPercentage = that.posToValue();
+            if((pageX - shiftX) > -1 && (pageX - shiftX ) < 266) {
+                that.model.currentPercentage = that.posToPercentage();
+
+                if(that.model.currentPercentage >= 1.0) {
+                    that.model.currentPercentage = 1;
+                } 
+                if(that.model.currentPercentage < 0) {
+                    that.model.currentPercentage = 0;
+                } 
+                
                 that.model.currentValue = Math.round(that.model.currentPercentage * (that.model.defaults.end - that.model.defaults.start) + that.model.defaults.start);
                 that.model.elem.children().css("left",  pageX - shiftX + 'px');
-
+                that.model.elem.children().children().html(<string><unknown>that.model.currentValue);
                 if(that.model.defaults.isDiscrete) {
                 that.model.elem.children().css("left",
-                  that.model.arrValues[Math.ceil(that.posToValue()/that.model.defaults.step)] + 'px');
+                  that.model.arrValues[Math.ceil(that.posToPercentage()/that.model.defaults.step)] + 'px');
                 }
 
-                console.log(that.model.currentValue)
             }
         }
         function onMouseMove(e: any) {
@@ -93,10 +102,10 @@ export class Presenter {
     //  Use to get percentage
     //*
 
-    posToValue(): number {
+    posToPercentage(): number {
         let handler = document.getElementById(this.model.handlerId);
         let container = document.getElementById(this.model.sliderId);
-        return Math.round((handler.offsetLeft/container.clientWidth)*100)/100;
+        return (((handler.offsetLeft+6)/container.clientWidth)*100)/100;
     }
 
     setHandlerPosition(pos: string) {
