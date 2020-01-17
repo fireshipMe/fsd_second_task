@@ -3,6 +3,7 @@ interface SliderOptions {
     step?: number
     end?: number
     start?: number
+    range?: boolean
 }
 
 interface JQuery {

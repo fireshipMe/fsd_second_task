@@ -1,4 +1,3 @@
-import * as $ from 'jquery'
 import { RaiseMessage } from './interfaces/observer_interface';
 
 export class View {
@@ -36,6 +35,16 @@ export class View {
         let that = this;  
         elem.children().mousedown(function(e) {
             that.raise({message:"mousedown", event: e});
+        });
+    }
+
+    addEventListenerRange(leftHandler: JQuery, rightHandler: JQuery) {
+        let that = this;
+        leftHandler.mousedown(function(e) {
+            that.raise({message:"LeftHandlerMousedown", event: e});
+        });
+        rightHandler.mousedown(function(e) {
+            that.raise({message:"RightHandlerMousedown", event: e});
         });
     }
 }

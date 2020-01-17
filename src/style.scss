@@ -17,7 +17,8 @@ $handler_background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
     border-radius: $slider_border_radius;
 
     &__handler {
-        position: relative;
+        z-index: 1;
+        position: absolute;
         width: 12px;
         height: 12px;
         background: $handler_background;
@@ -34,11 +35,31 @@ $handler_background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
         }
     }
 
-    
+    &__range {
+        top: -1px;
+        position: absolute;
+        background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+        border-radius: 3px;
+        height: 6px;
+        z-index: 0;
+    }
 }
 
 // delete then
 .container {
-    margin-top: 100px;
-    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    &_1 {
+        display: flex;
+    }
+    &_2 {
+        display: flex;
+        margin-top: 300px;
+    }
+    &_3 {
+        display: flex;
+        margin-top: 300px;
+    }
 }
+
